@@ -1,0 +1,65 @@
+<a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+<mat-sidenav-container class="estrutura">
+  <mat-sidenav #menu class="menu-lateral" [mode]="(telaPequena$ | async) ? 'over' : 'side'"
+    [opened]="!(telaPequena$ | async)" aria-label="Menu principal">
+    <div class="marca">
+      <!-- <span class="marca-simbolo" aria-hidden="true">PI</span> -->
+      <img src="imagens/logo.png" alt="logo" class="logo">
+    </div>
+    <mat-nav-list aria-label="Páginas do sistema">
+
+      <a mat-list-item routerLink="/projetos" routerLinkActive="item-ativo" ariaCurrentWhenActive="page"
+        (click)="menu.mode === 'over' && menu.close()">
+        <span class="numero-menu" aria-hidden="true"><img src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+        Dashboard
+      </a>
+
+      <a mat-list-item routerLink="/inicio" routerLinkActive="item-ativo" ariaCurrentWhenActive="page"
+        (click)="menu.mode === 'over' && menu.close()">
+        <span class="numero-menu" aria-hidden="true"><img src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+        Caminhões
+      </a>
+
+      <a mat-list-item routerLink="/projetos" routerLinkActive="item-ativo" ariaCurrentWhenActive="page"
+        (click)="menu.mode === 'over' && menu.close()">
+        <span class="numero-menu" aria-hidden="true"><img src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+        Viagens
+      </a>
+
+      <a mat-list-item routerLink="/inicio" routerLinkActive="item-ativo" ariaCurrentWhenActive="page"
+        (click)="menu.mode === 'over' && menu.close()">
+        <span class="numero-menu" aria-hidden="true"><img src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+        Relatórios
+      </a>
+
+      <a mat-list-item routerLink="/inicio" routerLinkActive="item-ativo" ariaCurrentWhenActive="page"
+        (click)="menu.mode === 'over' && menu.close()">
+        <span class="numero-menu" aria-hidden="true"><img src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+        Manutenções
+      </a>
+
+    </mat-nav-list>
+    <div class="rodape-menu">Botão de sair<br>Conta</div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="area-principal">
+    <mat-toolbar class="topo">
+      <button mat-icon-button type="button" (click)="menu.toggle()" aria-label="Abrir ou fechar menu"
+        [attr.aria-expanded]="menu.opened">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <span class="titulo-topo">{{ nomeSistema }}</span>
+      <span class="espacador"></span>
+      <div class="usuario"><span class="avatar" aria-hidden="true">AE</span>
+        <div class="usuario-texto"><strong>{{ usuario }}</strong><small>Perfil de demonstração</small></div>
+      </div>
+    </mat-toolbar>
+    <main id="conteudo" class="conteudo" tabindex="-1">
+      <!-- As páginas das rotas são exibidas aqui. -->
+      <router-outlet></router-outlet>
+    </main>
+    <footer class="rodape">Projeto Integrador <span>Modelo Angular e Material</span></footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
