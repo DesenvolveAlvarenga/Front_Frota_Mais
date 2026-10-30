@@ -1,3 +1,14 @@
+/* 1. Importação com todos os pesos comuns da Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* 2. Aplicação universal forçada */
+*, *::before, *::after {
+  font-family: 'Inter', sans-serif !important;
+}
+
+html, body {
+  font-family: 'Inter', sans-serif !important;
+}
 .estrutura {
     height: 100dvh;
 }
@@ -160,19 +171,6 @@ a.item-ativo {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-}
-
-.pular-conteudo {
-    position: fixed;
-    left: 12px;
-    top: -100px;
-    z-index: 1000;
-    background: white;
-    padding: 12px;
-}
-
-.pular-conteudo:focus {
-    top: 12px;
 }
 
 @media (max-width: 767px) {

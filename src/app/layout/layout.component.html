@@ -1,4 +1,10 @@
-<a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet">
+
+
 <mat-sidenav-container class="estrutura">
   <mat-sidenav #menu class="menu-lateral"
     [mode]="(telaPequena$ | async) ? 'over' : 'side'"
@@ -13,7 +19,7 @@
         ariaCurrentWhenActive="page"
         (click)="menu.mode === 'over' && menu.close()">
         <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+            src="imagens/icon-dashboard.svg" alt="Icon dashboard"></span>
         Dashboard
       </a>
 
@@ -21,7 +27,7 @@
         ariaCurrentWhenActive="page"
         (click)="menu.mode === 'over' && menu.close()">
         <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+            src="imagens/icon-caminhoes.svg" alt="Icon dashboard"></span>
         Caminhões
       </a>
 
@@ -29,7 +35,7 @@
         ariaCurrentWhenActive="page"
         (click)="menu.mode === 'over' && menu.close()">
         <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+            src="imagens/icon-viagens.svg" alt="Icon dashboard"></span>
         Viagens
       </a>
 
@@ -37,7 +43,7 @@
         ariaCurrentWhenActive="page"
         (click)="menu.mode === 'over' && menu.close()">
         <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+            src="imagens/icon-relatorios.svg" alt="Icon dashboard"></span>
         Relatórios
       </a>
 
@@ -45,7 +51,7 @@
         ariaCurrentWhenActive="page"
         (click)="menu.mode === 'over' && menu.close()">
         <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/dashboard.svg" alt="Icon dashboard"></span>
+            src="imagens/icon-manutencoes.svg" alt="Icon dashboard"></span>
         Manutenções
       </a>
 
