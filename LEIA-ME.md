@@ -1,3 +1,4 @@
+
 # Modelo de Projeto Integrador
 
 Projeto didático Angular 20 + Angular Material 20, com NgModules e componentes `standalone: false`.
