@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { InicioComponent } from './inicio.component';
+import { ManutencaoComponent } from './manutencao.component';
 
 @NgModule({
-  declarations: [InicioComponent],
+  declarations: [ManutencaoComponent],
   imports: [CommonModule, MatCardModule, MatButtonModule,
-    RouterModule.forChild([{ path: '', component: InicioComponent }])]
+    RouterModule.forChild([{ path: '', component: ManutencaoComponent }])]
 })
-export class InicioModule {}
+export class ManutencaoModule {}
