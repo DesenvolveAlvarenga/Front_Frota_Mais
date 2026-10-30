@@ -1,14 +1,16 @@
-/* 1. Importação com todos os pesos comuns da Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* 2. Aplicação universal forçada */
-*, *::before, *::after {
-  font-family: 'Inter', sans-serif !important;
+*,
+*::before,
+*::after {
+    font-family: 'Inter', sans-serif !important;
 }
 
-html, body {
-  font-family: 'Inter', sans-serif !important;
+html,
+body {
+    font-family: 'Inter', sans-serif !important;
 }
+
 .estrutura {
     height: 100dvh;
 }
@@ -20,6 +22,8 @@ html, body {
     border-radius: 0;
     color: #000;
 }
+
+
 
 .logo {
     width: 40%;
@@ -61,25 +65,51 @@ html, body {
 }
 
 mat-nav-list {
-    padding: 0 12px;
+    padding: 0 16px;
+
 }
 
+mat-nav-list a {
+    /* padding: 0 16px;
+    background-color: red;
+    display: flex; */
+    align-items: center;
+    /* Centra o ícone e o texto na vertical */
+    justify-content: center;
+    /* Ou center, dependendo se quer ao centro ou à esquerda */
+    gap: 10px;
+    /* Cria um espaçamento uniforme entre o ícone e a palavra "Dashboard" */
+    padding: 10px 16px;
+    /* Ajusta o espaço interno (respiro) da pílula */
+    border-radius: 50px;
+
+}
+
+
 a[mat-list-item] {
+    display: flex !important;
+    align-items: center !important;
+    /* Alinha o ícone e o texto perfeitamente ao centro na vertical */
+    gap: 12px;
+
     margin-bottom: 8px;
     border-radius: 50px;
-    --mat-list-list-item-label-text-color: #0A56D0;
+
+    --mat-list-list-item-label-text-color: #444746;
     --mat-list-list-item-hover-label-text-color: #0A56D0;
     --mat-list-list-item-focus-label-text-color: #0A56D0;
 }
+
+
 
 a.item-ativo {
     background: #EDF2FA;
 }
 
 .numero-menu {
-    margin-right: 14px;
-    font-size: 11px;
-    opacity: .7;
+    margin-right: 20px;
+    gap: 12px;
+    font-size: 16px;
     justify-content: center;
     align-items: center;
 }
@@ -172,6 +202,25 @@ a.item-ativo {
     justify-content: space-between;
     gap: 12px;
 }
+
+.rodape-menu-lateral {
+    list-style: none;
+    padding: 0 16px;
+
+}
+
+.rodape-menu-lateral li {
+    margin-bottom: 26px;
+}
+
+.rodape-menu-lateral a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0A56D0;
+    text-decoration: none;
+}
+
 
 @media (max-width: 767px) {
     .topo {

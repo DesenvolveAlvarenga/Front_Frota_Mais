@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 /* Tema do Material configurado no angular.json. Sem fontes externas. */
 html,
 body {
@@ -5,10 +6,6 @@ body {
     height: 100%;
 }
 
-/* 1. Importação com todos os pesos comuns da Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* 2. Aplicação universal forçada */
 *, *::before, *::after {
   font-family: 'Inter', sans-serif !important;
 }
