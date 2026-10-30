@@ -85,3 +85,5 @@ Ao hospedar como SPA, o servidor precisa direcionar rotas desconhecidas para ind
 - https://angular.dev/guide/routing
 - https://material.angular.dev/components/sidenav/overview
 - https://material.angular.dev/components/toolbar/overview
+
+
