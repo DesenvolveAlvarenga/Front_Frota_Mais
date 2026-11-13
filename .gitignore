@@ -3,3 +3,14 @@ dist/
 .angular/
 out-tsc/
 .vscode/
+
+# Contexto privado do Frota+ (distribuição controlada; nunca versionar)
+contexto-local/
+
+# Variáveis de ambiente locais (podem conter credenciais)
+.env
+.env.*
+!.env.example
+
+# Relatórios de cobertura dos testes (ng test --code-coverage)
+/coverage
