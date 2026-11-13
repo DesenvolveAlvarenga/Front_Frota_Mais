@@ -1,97 +1,73 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-  rel="stylesheet">
-
+<!--
+  "Conta" ainda não tem ação: a página de conta (troca de senha) entra num próximo grupo de telas.
+-->
 <mat-sidenav-container class="estrutura">
-  <mat-sidenav #menu class="menu-lateral"
-    [mode]="(telaPequena$ | async) ? 'over' : 'side'"
+  <mat-sidenav class="menu-lateral" mode="side"
     [opened]="!(telaPequena$ | async)" aria-label="Menu principal">
     <div class="marca">
-      <img src="imagens/logo.png" alt="logo" class="logo">
+      <img src="imagens/logo.png" alt="Frota+" class="logo">
     </div>
-    <mat-nav-list  aria-label="Páginas do sistema">
 
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="item-ativo"
-        ariaCurrentWhenActive="page"
-        (click)="menu.mode === 'over' && menu.close()">
-        <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/icon-dashboard.svg" alt="Icon dashboard"></span>
-            <span>Dashboard</span>
-        
-      </a>
-
-      <a mat-list-item routerLink="/caminhoes" routerLinkActive="item-ativo"
-        ariaCurrentWhenActive="page"
-        (click)="menu.mode === 'over' && menu.close()">
-        <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/icon-caminhoes.svg" alt="Icon caminhoes"></span>
-        <span>Caminhões</span>
-      </a>
-
-      <a mat-list-item routerLink="/viagens" routerLinkActive="item-ativo"
-        ariaCurrentWhenActive="page"
-        (click)="menu.mode === 'over' && menu.close()">
-        <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/icon-viagens.svg" alt="Icon viagens"></span>
-      <span>Viagens</span>
-      </a>
-
-      <a mat-list-item routerLink="/relatorios" routerLinkActive="item-ativo"
-        ariaCurrentWhenActive="page"
-        (click)="menu.mode === 'over' && menu.close()">
-        <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/icon-relatorios.svg" alt="Icon relatorios"></span>
-        <span>Relatórios</span>
-      </a>
-
-      <a mat-list-item routerLink="/manutencao" routerLinkActive="item-ativo"
-        ariaCurrentWhenActive="page"
-        (click)="menu.mode === 'over' && menu.close()">
-        <span class="numero-menu" aria-hidden="true"><img
-            src="imagens/icon-manutencoes.svg" alt="Icon manutenção"></span>
-      <span>Manutenções</span>
-      </a>
-
+    <mat-nav-list aria-label="Páginas do sistema">
+      @for (item of itensMenu(); track item.rota) {
+        <a mat-list-item [routerLink]="item.rota" routerLinkActive="item-ativo"
+          ariaCurrentWhenActive="page">
+          <span class="item-menu">
+            <img [src]="item.icone" alt="" class="icone-menu">
+            <span>{{ item.rotulo }}</span>
+          </span>
+        </a>
+      }
     </mat-nav-list>
 
-
-    <!-- Rodapé do menu lateral fixo na parte inferior -->
-    <div class="rodape-menu-container">
-      <ul class="rodape-menu-lateral">
-        <li><a href="#"><img src="imagens/icon-logout.svg"
-              alt="Icone de LogOut"> <span>Sair</span></a></li>
-        <li><a href="#"><img src="imagens/icon-usuario.svg"
-              alt="Icone de LogOut"> <span>Conta</span></a></li>
-      </ul>
+    <div class="rodape-menu-lateral">
+      <button type="button" class="acao-conta" (click)="sair()">
+        <img src="imagens/icon-logout.svg" alt="" width="16" height="16">
+        <span>Sair</span>
+      </button>
+      <button type="button" class="acao-conta" aria-disabled="true"
+        title="A página da conta entra no próximo grupo de telas">
+        <img src="imagens/icon-usuario.svg" alt="" width="16" height="16">
+        <span>Conta</span>
+      </button>
     </div>
- 
   </mat-sidenav>
 
   <mat-sidenav-content class="area-principal">
-    <mat-toolbar class="topo">
-      <button mat-icon-button type="button" (click)="menu.toggle()"
-        aria-label="Abrir ou fechar menu"
-        [attr.aria-expanded]="menu.opened">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-          aria-hidden="true">
-          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-      <span class="titulo-topo">{{ nomeSistema }}</span>
-      <span class="espacador"></span>
-      <div class="usuario"><span class="avatar" aria-hidden="true">AE</span>
-        <div class="usuario-texto"><strong>{{ usuario }}</strong><small>Perfil
-            de demonstração</small></div>
-      </div>
-    </mat-toolbar>
+    @if (telaPequena$ | async) {
+      <header class="topo-celular">
+        <button type="button" class="acao-conta" aria-disabled="true" aria-label="Conta"
+          title="A página da conta entra no próximo grupo de telas">
+          <img src="imagens/icon-usuario.svg" alt="" width="22" height="22">
+        </button>
+        <img src="imagens/logo.png" alt="Frota+" class="logo-celular">
+        <button type="button" class="acao-conta" aria-label="Sair" (click)="sair()">
+          <img src="imagens/icon-logout.svg" alt="" width="22" height="22">
+        </button>
+      </header>
+    }
+
     <main id="conteudo" class="conteudo" tabindex="-1">
-      <!-- As páginas das rotas são exibidas aqui. -->
+      @if (demonstracao()) {
+        <p class="faixa-demonstracao" role="note">
+          Modo demonstração: as telas usam dados fictícios e nada é gravado no servidor.
+        </p>
+      }
       <router-outlet></router-outlet>
     </main>
-    <footer class="rodape">Projeto Integrador <span>Modelo Angular e
-        Material</span></footer>
+
+    @if (telaPequena$ | async) {
+      <nav class="navegacao-inferior" aria-label="Páginas do sistema">
+        @for (item of itensMenu(); track item.rota) {
+          <a [routerLink]="item.rota" routerLinkActive="aba-ativa"
+            ariaCurrentWhenActive="page" class="aba">
+            <span class="icone-aba" aria-hidden="true"
+              [style.mask-image]="'url(' + item.icone + ')'"
+              [style.-webkit-mask-image]="'url(' + item.icone + ')'"></span>
+            <span>{{ item.rotulo }}</span>
+          </a>
+        }
+      </nav>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,0 +1,76 @@
+/* Campo das telas de acesso: caixa branca com ícone, rótulo e valor na mesma linha (Figma). */
+
+.campo-acesso {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px 0 20px;
+    background: #ffffff;
+    border: 1px solid #d9dee5;
+    border-radius: 10px;
+    cursor: text;
+}
+
+.campo-acesso:focus-within {
+    border-color: #0A56D0;
+    box-shadow: 0 0 0 3px rgba(10, 86, 208, 0.15);
+}
+
+.icone {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    fill: #8a94a6;
+}
+
+.rotulo {
+    color: #444746;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 16px;
+    color: #1b3045;
+}
+
+.alternar {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.alternar svg {
+    width: 22px;
+    height: 22px;
+    fill: #8a94a6;
+}
+
+.alternar:focus-visible {
+    outline: 2px solid #0A56D0;
+}
+
+@media (max-width: 767px) {
+    .campo-acesso {
+        height: 46px;
+        padding: 0 12px 0 14px;
+    }
+
+    .rotulo,
+    input {
+        font-size: 14px;
+    }
+}

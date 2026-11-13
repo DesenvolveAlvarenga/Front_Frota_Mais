@@ -1,0 +1,104 @@
+<app-janela [titulo]="titulo">
+  <form [formGroup]="formulario" (ngSubmit)="salvar()" id="formulario-caminhao" novalidate>
+    @if (cadastroIncompleto && !somenteLeitura) {
+      <p class="aviso-formulario" role="note">
+        <app-icone nome="alerta" [tamanho]="18"></app-icone>
+        Este cadastro é antigo e está sem marca ou eixos. Para salvar qualquer alteração, preencha os dois.
+      </p>
+    }
+
+    <div class="grade-formulario">
+      <div class="campo">
+        <label for="caminhao-placa">Placa</label>
+        <input id="caminhao-placa" formControlName="placa" placeholder="ABC-1234" autocomplete="off"
+          [maxlength]="limites.placaMaxDigitada" [attr.aria-invalid]="invalido('placa')"
+          aria-describedby="caminhao-placa-erro" style="text-transform: uppercase">
+        @if (invalido('placa')) {
+          <p class="erro-campo-formulario" id="caminhao-placa-erro">
+            {{ formulario.controls.placa.hasError('required') ? 'Informe a placa.' : 'A placa deve ter de 1 a 8 letras ou números.' }}
+          </p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="caminhao-marca">Marca</label>
+        <input id="caminhao-marca" formControlName="marca" placeholder="Ex: Scania, Volvo"
+          [maxlength]="limites.marcaMax" [attr.aria-invalid]="invalido('marca')" aria-describedby="caminhao-marca-erro">
+        @if (invalido('marca')) {
+          <p class="erro-campo-formulario" id="caminhao-marca-erro">Informe a marca.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="caminhao-modelo">Modelo</label>
+        <input id="caminhao-modelo" formControlName="modelo" placeholder="Ex: R440, FH 540"
+          [maxlength]="limites.modeloMax" [attr.aria-invalid]="invalido('modelo')" aria-describedby="caminhao-modelo-erro">
+        @if (invalido('modelo')) {
+          <p class="erro-campo-formulario" id="caminhao-modelo-erro">Informe o modelo.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="caminhao-ano">Ano de fabricação</label>
+        <input id="caminhao-ano" type="number" inputmode="numeric" formControlName="ano" placeholder="AAAA"
+          [min]="limites.anoMin" [max]="limites.anoMax" [attr.aria-invalid]="invalido('ano')" aria-describedby="caminhao-ano-erro">
+        @if (invalido('ano')) {
+          <p class="erro-campo-formulario" id="caminhao-ano-erro">Informe um ano entre {{ limites.anoMin }} e {{ limites.anoMax }}.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="caminhao-eixos">Eixos</label>
+        <input id="caminhao-eixos" type="number" inputmode="numeric" formControlName="eixos" placeholder="Ex: 6"
+          [min]="limites.eixosMin" [max]="limites.eixosMax" [attr.aria-invalid]="invalido('eixos')"
+          aria-describedby="caminhao-eixos-ajuda caminhao-eixos-erro">
+        <p class="ajuda-campo" id="caminhao-eixos-ajuda">Dado de cadastro; não é usado para calcular pedágio.</p>
+        @if (invalido('eixos')) {
+          <p class="erro-campo-formulario" id="caminhao-eixos-erro">Informe de {{ limites.eixosMin }} a {{ limites.eixosMax }} eixos.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="caminhao-tanque">Tanque de diesel (litros) <span class="opcional">— opcional</span></label>
+        <input id="caminhao-tanque" type="number" inputmode="numeric" formControlName="capacidadeTanqueLitros"
+          placeholder="Ex: 600" min="1" [attr.aria-invalid]="invalido('capacidadeTanqueLitros')"
+          aria-describedby="caminhao-tanque-ajuda caminhao-tanque-erro">
+        <p class="ajuda-campo" id="caminhao-tanque-ajuda">Quando informado, limita os litros de cada abastecimento de diesel.</p>
+        @if (invalido('capacidadeTanqueLitros')) {
+          <p class="erro-campo-formulario" id="caminhao-tanque-erro">Informe um número inteiro de litros, maior que zero.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="caminhao-status">Status</label>
+        @if (dados.caminhao?.status === 'EXCLUIDO') {
+          <input id="caminhao-status" [value]="rotuloStatus.EXCLUIDO" disabled>
+        } @else {
+          <select id="caminhao-status" formControlName="status" aria-describedby="caminhao-status-ajuda">
+            @for (status of statusEditaveis; track status) {
+              <option [value]="status">{{ rotuloStatus[status] }}</option>
+            }
+          </select>
+        }
+        <p class="ajuda-campo" id="caminhao-status-ajuda">Caminhão inativo não abre viagens. A exclusão é feita pela lista.</p>
+      </div>
+    </div>
+  </form>
+
+  <div rodape>
+    @if (integracaoPendente()) {
+      <p class="aviso-formulario" role="status">
+        A comunicação com o servidor ainda não foi integrada. Nada foi gravado.
+      </p>
+    }
+    <div class="acoes-janela">
+      <button type="button" class="botao botao-secundario" mat-dialog-close>{{ somenteLeitura ? 'Fechar' : 'Cancelar' }}</button>
+      @if (!somenteLeitura) {
+        <button type="submit" form="formulario-caminhao" class="botao botao-primario" [disabled]="enviando()">
+          <app-icone nome="salvar" [tamanho]="18"></app-icone>
+          {{ enviando() ? 'Salvando…' : 'Salvar caminhão' }}
+        </button>
+      }
+    </div>
+  </div>
+</app-janela>
