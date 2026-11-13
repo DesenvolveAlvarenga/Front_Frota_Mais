@@ -1,0 +1,64 @@
+<app-janela [titulo]="titulo"
+  [descricao]="novo ? 'O motorista recebe um convite por e-mail e cria a própria senha. Você não define nem vê a senha dele.' : null">
+  <form [formGroup]="formulario" (ngSubmit)="salvar()" id="formulario-motorista" novalidate>
+    <div class="grade-formulario">
+      <div class="campo">
+        <label for="motorista-nome">Nome</label>
+        <input id="motorista-nome" formControlName="nome" autocomplete="off" [maxlength]="limites.nomeMax"
+          [attr.aria-invalid]="invalido('nome')" aria-describedby="motorista-nome-erro">
+        @if (invalido('nome')) {
+          <p class="erro-campo-formulario" id="motorista-nome-erro">Informe o nome.</p>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="motorista-email">E-mail</label>
+        <input id="motorista-email" type="email" inputmode="email" formControlName="email" autocomplete="off"
+          [maxlength]="limites.emailMax" [attr.aria-invalid]="invalido('email')"
+          aria-describedby="motorista-email-ajuda motorista-email-erro">
+        <p class="ajuda-campo" id="motorista-email-ajuda">
+          {{ novo ? 'O convite é enviado para este endereço.' : 'O e-mail não pode ser alterado.' }}
+        </p>
+        @if (invalido('email')) {
+          <p class="erro-campo-formulario" id="motorista-email-erro">Informe um e-mail válido.</p>
+        }
+      </div>
+
+      @if (novo) {
+        <div class="campo campo-inteiro">
+          <app-selecao-caminhoes [controle]="formulario.controls.caminhaoIds" [caminhoes]="caminhoesOferecidos">
+          </app-selecao-caminhoes>
+        </div>
+      } @else {
+        <div class="campo campo-inteiro">
+          <span class="rotulo-campo">Situação: {{ rotuloSituacao[dados.motorista!.situacao] }}</span>
+          @if (pendente) {
+            <p class="ajuda-campo">A conta será ativada quando o motorista usar o convite e criar a senha.
+              Até lá, não é possível ativá-la por aqui.</p>
+          } @else {
+            <label class="opcao-marcavel">
+              <input type="checkbox" formControlName="ativo">
+              Conta ativa (pode entrar no Frota+)
+            </label>
+          }
+          <p class="ajuda-campo">Os caminhões vinculados são alterados pela ação “Caminhões” da lista.</p>
+        </div>
+      }
+    </div>
+  </form>
+
+  <div rodape>
+    @if (integracaoPendente()) {
+      <p class="aviso-formulario" role="status">
+        A comunicação com o servidor ainda não foi integrada. Nada foi gravado{{ novo ? ' e nenhum convite foi enviado' : '' }}.
+      </p>
+    }
+    <div class="acoes-janela">
+      <button type="button" class="botao botao-secundario" mat-dialog-close>Cancelar</button>
+      <button type="submit" form="formulario-motorista" class="botao botao-primario" [disabled]="enviando()">
+        <app-icone [nome]="novo ? 'enviar' : 'salvar'" [tamanho]="18"></app-icone>
+        {{ enviando() ? 'Enviando…' : (novo ? 'Enviar convite' : 'Salvar') }}
+      </button>
+    </div>
+  </div>
+</app-janela>

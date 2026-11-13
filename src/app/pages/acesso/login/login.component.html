@@ -1,0 +1,51 @@
+<h1>Bem-vindo(a)!</h1>
+<p class="descricao">Faça login para acessar o sistema de controle da sua frota</p>
+
+<form [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
+  <div class="campos">
+    <div>
+      <label class="campo-acesso" for="login-email">
+        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+        <span class="rotulo">E-mail:</span>
+        <input id="login-email" type="email" formControlName="email" autocomplete="username"
+          inputmode="email" aria-describedby="login-email-erro"
+          [attr.aria-invalid]="formulario.controls.email.invalid && formulario.controls.email.touched">
+      </label>
+      @if (formulario.controls.email.touched && formulario.controls.email.invalid) {
+        <p class="erro-campo" id="login-email-erro">Informe um e-mail válido.</p>
+      }
+    </div>
+
+    <div>
+      <app-campo-senha [controle]="formulario.controls.senha" descricaoId="login-senha-erro"></app-campo-senha>
+      @if (formulario.controls.senha.touched && formulario.controls.senha.invalid) {
+        <p class="erro-campo" id="login-senha-erro">Informe a senha.</p>
+      }
+    </div>
+  </div>
+
+  <div class="botoes">
+    <button type="submit" class="botao-primario">Entrar</button>
+    <a routerLink="/criar-conta" class="botao-secundario">Criar conta</a>
+  </div>
+</form>
+
+<button type="button" class="link" (click)="mostrarAvisoSenha = !mostrarAvisoSenha"
+  [attr.aria-expanded]="mostrarAvisoSenha" aria-controls="aviso-senha">Esqueceu sua senha?</button>
+@if (mostrarAvisoSenha) {
+  <p class="observacao" id="aviso-senha" role="status">
+    A recuperação de senha ainda não está disponível no Frota+.
+  </p>
+}
+
+<section class="demonstracao" aria-labelledby="titulo-demonstracao">
+  <strong id="titulo-demonstracao">Modo demonstração</strong>
+  <p>Enquanto a integração com o servidor não existe, abra as telas com dados fictícios.
+    Nada é gravado.</p>
+  <div class="demonstracao-acoes">
+    <button type="button" (click)="entrarDemonstracao('DONO')">Ver como dono</button>
+    <button type="button" (click)="entrarDemonstracao('MOTORISTA')">Ver como motorista</button>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<h1>Bem-vindo(a)!</h1>
+<p class="descricao">Crie a conta da sua empresa para controlar a sua frota</p>
+
+<form [formGroup]="formulario" (ngSubmit)="criar()" novalidate>
+  <div class="campos">
+    <div>
+      <label class="campo-acesso" for="registro-empresa">
+        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+        </svg>
+        <span class="rotulo">Empresa:</span>
+        <input id="registro-empresa" formControlName="nomeEmpresa" autocomplete="organization"
+          maxlength="120" aria-describedby="registro-empresa-erro"
+          [attr.aria-invalid]="formulario.controls.nomeEmpresa.invalid && formulario.controls.nomeEmpresa.touched">
+      </label>
+      @if (formulario.controls.nomeEmpresa.touched && formulario.controls.nomeEmpresa.invalid) {
+        <p class="erro-campo" id="registro-empresa-erro">Informe o nome da empresa.</p>
+      }
+    </div>
+
+    <div>
+      <label class="campo-acesso" for="registro-nome">
+        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+        <span class="rotulo">Nome:</span>
+        <input id="registro-nome" formControlName="nome" autocomplete="name" maxlength="120"
+          aria-describedby="registro-nome-erro"
+          [attr.aria-invalid]="formulario.controls.nome.invalid && formulario.controls.nome.touched">
+      </label>
+      @if (formulario.controls.nome.touched && formulario.controls.nome.invalid) {
+        <p class="erro-campo" id="registro-nome-erro">Informe o seu nome.</p>
+      }
+    </div>
+
+    <div>
+      <label class="campo-acesso" for="registro-email">
+        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <span class="rotulo">E-mail:</span>
+        <input id="registro-email" type="email" formControlName="email" autocomplete="email"
+          inputmode="email" maxlength="160" aria-describedby="registro-email-erro"
+          [attr.aria-invalid]="formulario.controls.email.invalid && formulario.controls.email.touched">
+      </label>
+      @if (formulario.controls.email.touched && formulario.controls.email.invalid) {
+        <p class="erro-campo" id="registro-email-erro">Informe um e-mail válido.</p>
+      }
+    </div>
+
+    <div>
+      <app-campo-senha [controle]="formulario.controls.senha" autocomplete="new-password"
+        descricaoId="registro-senha-regra"></app-campo-senha>
+      <p class="observacao" id="registro-senha-regra"
+        [class.erro-campo]="formulario.controls.senha.touched && formulario.controls.senha.invalid">
+        Mínimo de 8 caracteres, com pelo menos uma letra e um número.
+      </p>
+    </div>
+  </div>
+
+  <div class="botoes">
+    <button type="submit" class="botao-primario">Criar conta</button>
+    <a routerLink="/login" class="botao-secundario">Já tenho conta</a>
+  </div>
+</form>

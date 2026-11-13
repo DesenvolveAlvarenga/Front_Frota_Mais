@@ -1,0 +1,73 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    /* Altura limitada para o corpo rolar e os botões ficarem sempre visíveis. */
+    max-height: calc(100dvh - 48px);
+    padding: 24px 28px 24px;
+}
+
+.puxador {
+    display: none;
+    width: 48px;
+    height: 4px;
+    border-radius: 2px;
+    background: #cbd5e1;
+    margin: -8px auto 16px;
+    flex-shrink: 0;
+}
+
+.titulo-janela {
+    margin: 0;
+    padding: 0 0 20px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: normal;
+    color: #1e293b;
+    border-bottom: 1px solid #eef2f6;
+}
+
+/* Remove o espaçamento padrão do título do Material. */
+.titulo-janela.mat-mdc-dialog-title::before {
+    display: none;
+}
+
+.descricao-janela {
+    margin: 16px 0 0;
+    color: #586a7f;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.corpo-janela {
+    padding: 24px 0;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.rodape-janela {
+    border-top: 1px solid #eef2f6;
+    padding-top: 20px;
+    flex-shrink: 0;
+}
+
+:host-context(.folha-inferior) {
+    padding: 24px 24px 20px;
+    max-height: 92dvh;
+}
+
+:host-context(.folha-inferior) .puxador {
+    display: block;
+}
+
+:host-context(.folha-inferior) .titulo-janela {
+    font-size: 18px;
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+:host-context(.folha-inferior) .rodape-janela {
+    border-top: 0;
+    padding-top: 4px;
+}

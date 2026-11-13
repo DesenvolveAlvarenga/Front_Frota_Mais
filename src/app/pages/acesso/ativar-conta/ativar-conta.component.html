@@ -1,0 +1,35 @@
+<h1>Bem-vindo(a)!</h1>
+
+@if (semToken) {
+  <p class="descricao">Este link de convite não é válido. Abra o link completo recebido por e-mail ou
+    peça um novo convite ao responsável pela empresa.</p>
+  <div class="botoes">
+    <a routerLink="/login" class="botao-secundario">Ir para o login</a>
+  </div>
+} @else {
+  <p class="descricao">Crie a sua senha para começar a usar o Frota+</p>
+
+  <form [formGroup]="formulario" (ngSubmit)="ativar()" novalidate>
+    <div class="campos">
+      <div>
+        <app-campo-senha [controle]="formulario.controls.senha" rotulo="Nova senha"
+          autocomplete="new-password" descricaoId="ativacao-senha-regra"></app-campo-senha>
+        <p class="observacao" id="ativacao-senha-regra"
+          [class.erro-campo]="formulario.controls.senha.touched && formulario.controls.senha.invalid">
+          Mínimo de 8 caracteres, com pelo menos uma letra e um número.
+        </p>
+      </div>
+      <div>
+        <app-campo-senha [controle]="formulario.controls.confirmacao" rotulo="Confirme"
+          autocomplete="new-password" descricaoId="ativacao-confirmacao-erro"></app-campo-senha>
+        @if (formulario.controls.confirmacao.touched && formulario.hasError('confirmacaoDiferente')) {
+          <p class="erro-campo" id="ativacao-confirmacao-erro">As senhas não são iguais.</p>
+        }
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="botao-primario">Ativar conta</button>
+    </div>
+  </form>
+}

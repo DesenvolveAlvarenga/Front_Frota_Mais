@@ -58,14 +58,25 @@ p {
     line-height: 1.7;
 }
 
+/* Cabeçalho de página do Figma: título azul e subtítulo sobre a faixa #EDF2FA do layout. */
 .cabecalho-pagina {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.cabecalho-pagina h1 {
+    color: #0A56D0;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: normal;
+    margin: 0 0 8px;
 }
 
 .cabecalho-pagina>p:last-child {
-    color: #64748b;
+    color: #444746;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.4;
 }
 
 mat-card {
@@ -135,6 +146,22 @@ code {
 }
 
 @media (max-width: 767px) {
+    .cabecalho-pagina {
+        margin-bottom: 20px;
+    }
+
+    .cabecalho-pagina h1 {
+        font-size: 24px;
+        line-height: 32px;
+        margin: 0;
+    }
+
+    .cabecalho-pagina>p:last-child {
+        color: #64748b;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
     .grade-info {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -146,5 +173,562 @@ code {
 
     .caminho {
         margin-bottom: 24px;
+    }
+}
+/* =====================================================================
+   Componentes visuais das telas internas (padrões dos frames do Figma:
+   "Caminhões", "Novo Caminhão", "Viagens", "Manutenções" e versões mobile).
+   ===================================================================== */
+
+/* ---------- Cabeçalho com ação (ex.: "+ Novo Caminhão") ---------- */
+
+.cabecalho-pagina.com-acoes {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.botao-cabecalho {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 14px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0A56D0;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.botao-cabecalho:hover {
+    background: #f5f8fd;
+}
+
+/* ---------- Cartão de lista ("Frota", "Histórico de Viagens") ---------- */
+
+.cartao-lista {
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.cartao-lista-topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding: 24px 32px 20px;
+    border-bottom: 1px solid #eef2f6;
+}
+
+.cartao-lista-topo h2 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 26px;
+    color: #1f1f1f;
+}
+
+.cartao-lista-topo .contagem {
+    margin: 2px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #444746;
+}
+
+.filtros-lista {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+}
+
+.busca {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #8a94a6;
+}
+
+.busca:focus-within {
+    border-color: #0A56D0;
+}
+
+.busca input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 14px;
+    color: #1b3045;
+    width: 200px;
+}
+
+.busca select {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 14px;
+    color: #1b3045;
+    height: 100%;
+}
+
+.opcao-marcavel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #444746;
+    cursor: pointer;
+}
+
+.opcao-marcavel input {
+    width: 16px;
+    height: 16px;
+    accent-color: #0A56D0;
+    margin: 0;
+}
+
+/* ---------- Tabela ---------- */
+
+.tabela-rolagem {
+    overflow-x: auto;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #444746;
+}
+
+.tabela th {
+    text-align: left;
+    font-weight: 700;
+    color: #1f1f1f;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid #eef2f6;
+    white-space: nowrap;
+}
+
+.tabela td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eef2f6;
+    vertical-align: middle;
+}
+
+.tabela th:first-child,
+.tabela td:first-child {
+    padding-left: 32px;
+}
+
+.tabela th:last-child,
+.tabela td:last-child {
+    padding-right: 32px;
+}
+
+.tabela .destaque {
+    font-weight: 700;
+    color: #1f1f1f;
+}
+
+.tabela .secundario {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.tabela .coluna-acoes {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Ações em quantidade variável por linha: alinhadas à esquerda para não "dançar". */
+.tabela .acoes-esquerda {
+    text-align: left;
+}
+
+.tabela td.destaque {
+    white-space: nowrap;
+}
+
+.linha-esmaecida td {
+    color: #94a3b8;
+}
+
+.sem-resultado {
+    margin: 0;
+    padding: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* ---------- Ações em ícone (lápis, lixeira...) ---------- */
+
+.acoes-linha {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.acao-icone {
+    width: 36px;
+    height: 36px;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: #0A56D0;
+    cursor: pointer;
+}
+
+.acao-icone:hover {
+    background: #EDF2FA;
+}
+
+.acao-icone.perigo {
+    color: #c0392b;
+}
+
+.acao-icone.perigo:hover {
+    background: #fdecea;
+}
+
+.acao-icone:focus-visible,
+.botao:focus-visible,
+.botao-cabecalho:focus-visible {
+    outline: 2px solid #0A56D0;
+    outline-offset: 2px;
+}
+
+/* ---------- Selos de status ---------- */
+
+.selo {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 15px;
+    white-space: nowrap;
+    background: #EDF2FA;
+    color: #0A56D0;
+}
+
+.selo-neutro {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.selo-alerta {
+    background: #fdf3e1;
+    color: #8a5a00;
+}
+
+.selo-sucesso {
+    background: #e6f4ea;
+    color: #1e7e34;
+}
+
+.selo-perigo {
+    background: #fdecea;
+    color: #a93226;
+}
+
+/* ---------- Lista em cartões (celular) ---------- */
+
+.lista-cartoes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cartao-item {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+}
+
+.cartao-item-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.cartao-item-titulo {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.cartao-item-linha {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #64748b;
+}
+
+.cartao-item-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* ---------- Formulários ---------- */
+
+.grade-formulario {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 32px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.campo-inteiro {
+    grid-column: 1 / -1;
+}
+
+.campo > label,
+.campo > .rotulo-campo {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.campo .opcional {
+    font-weight: 400;
+    color: #64748b;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+.campo textarea {
+    height: auto;
+    min-height: 88px;
+    padding: 12px 14px;
+    resize: vertical;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #94a3b8;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline: 0;
+    border-color: #0A56D0;
+    box-shadow: 0 0 0 3px rgba(10, 86, 208, 0.15);
+    background: #ffffff;
+}
+
+.campo input:disabled,
+.campo select:disabled {
+    color: #64748b;
+    background: #f1f5f9;
+    cursor: not-allowed;
+}
+
+.campo input[aria-invalid="true"],
+.campo select[aria-invalid="true"] {
+    border-color: #b3261e;
+}
+
+.ajuda-campo {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #64748b;
+}
+
+.erro-campo-formulario {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #b3261e;
+}
+
+.aviso-formulario {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #fdf3e1;
+    color: #6b4700;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ---------- Botões das janelas ---------- */
+
+.acoes-janela {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.botao:disabled {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+.botao.botao-primario {
+    background: #0A56D0;
+    color: #ffffff;
+}
+
+.botao.botao-primario:hover:not(:disabled) {
+    background: #084bb6;
+}
+
+.botao.botao-secundario {
+    background: #ffffff;
+    color: #1e293b;
+    border-color: #d9dee5;
+}
+
+.botao.botao-secundario:hover:not(:disabled) {
+    background: #f8fafc;
+}
+
+.botao.botao-perigo {
+    background: #c0392b;
+    color: #ffffff;
+}
+
+.botao.botao-perigo:hover:not(:disabled) {
+    background: #a93226;
+}
+
+/* ---------- Janela (MatDialog) ---------- */
+
+.janela-frota .mat-mdc-dialog-surface {
+    border-radius: 24px;
+}
+
+.folha-inferior .mat-mdc-dialog-surface {
+    border-radius: 24px 24px 0 0;
+}
+
+.folha-inferior.cdk-overlay-pane {
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .cabecalho-pagina.com-acoes {
+        align-items: flex-end;
+    }
+
+    .botao-cabecalho {
+        margin-top: 0;
+        padding: 8px 14px;
+        font-size: 14px;
+        background: #EDF2FA;
+    }
+
+    .cartao-lista {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .cartao-lista-topo {
+        padding: 0 0 16px;
+        border-bottom: 0;
+    }
+
+    .cartao-lista-topo h2 {
+        display: none;
+    }
+
+    .busca,
+    .busca input {
+        width: 100%;
+    }
+
+    .filtros-lista {
+        width: 100%;
+    }
+
+    .grade-formulario {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .campo > label,
+    .campo > .rotulo-campo {
+        font-size: 14px;
+    }
+
+    .campo input,
+    .campo select {
+        height: 46px;
+    }
+
+    .acoes-janela .botao {
+        flex: 1;
+        min-height: 46px;
+        padding: 0 12px;
+        white-space: nowrap;
     }
 }

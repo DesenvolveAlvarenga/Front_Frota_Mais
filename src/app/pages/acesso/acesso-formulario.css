@@ -1,0 +1,181 @@
+/* Estilos comuns aos formulários de acesso (Figma: login / criar conta). */
+
+:host {
+    display: block;
+    max-width: 516px;
+    width: 100%;
+}
+
+h1 {
+    color: #0A56D0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: normal;
+    margin: 0 0 12px;
+    max-width: none;
+}
+
+.descricao {
+    color: #444746;
+    font-size: 16px;
+    line-height: 1.45;
+    margin: 0 0 64px;
+    max-width: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 0 0 32px 12px;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-left: 12px;
+}
+
+.botao-primario,
+.botao-secundario {
+    height: 60px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+}
+
+.botao-primario {
+    background: #0A56D0;
+    color: #ffffff;
+    border: 0;
+}
+
+.botao-primario:hover {
+    background: #084bb6;
+}
+
+.botao-secundario {
+    background: #ffffff;
+    color: #0A56D0;
+    border: 1.5px solid #0A56D0;
+}
+
+.botao-primario:focus-visible,
+.botao-secundario:focus-visible,
+.link:focus-visible {
+    outline: 3px solid #9cbcf0;
+    outline-offset: 2px;
+}
+
+.link {
+    align-self: center;
+    margin-top: 48px;
+    background: none;
+    border: 0;
+    color: #0A56D0;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.observacao {
+    margin: 12px 0 0 12px;
+    color: #586a7f;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.erro-campo {
+    margin: 6px 0 0 4px;
+    color: #b3261e;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Bloco do modo demonstração: fora do design do Figma e removível. */
+.demonstracao {
+    margin: 40px 0 0 12px;
+    padding: 16px;
+    border: 1px dashed #b8c4d4;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.demonstracao strong {
+    display: block;
+    font-size: 13px;
+    color: #1b3045;
+}
+
+.demonstracao p {
+    margin: 4px 0 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #586a7f;
+}
+
+.demonstracao-acoes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.demonstracao-acoes button {
+    border: 1px solid #0A56D0;
+    background: #ffffff;
+    color: #0A56D0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+
+    .descricao {
+        font-size: 14px;
+        max-width: none;
+        margin-bottom: 36px;
+    }
+
+    .campos,
+    .botoes,
+    .observacao,
+    .demonstracao {
+        margin-left: 0;
+    }
+
+    .campos {
+        gap: 14px;
+        margin-bottom: 40px;
+    }
+
+    .botao-primario,
+    .botao-secundario {
+        height: 44px;
+        font-size: 15px;
+    }
+
+    .link {
+        margin-top: 40px;
+    }
+}

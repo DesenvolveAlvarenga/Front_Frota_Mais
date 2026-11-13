@@ -1,0 +1,75 @@
+/* Figma: frames "login" (80:402) e "Criar conta" (80:483); mobile 80:535 e 80:635. */
+
+.acesso {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(0, 684px) 1fr;
+    background: #ffffff;
+}
+
+.lado-formulario {
+    padding: 44px 72px 48px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+    margin-bottom: 72px;
+}
+
+/*
+ * No Figma o painel tem a foto de um caminhão na estrada. O arquivo da foto ainda
+ * não foi baixado (limite de chamadas do Figma); por enquanto, fundo em degradê
+ * nas cores da marca. Trocar por `background-image` quando o asset existir.
+ */
+.painel-marca {
+    background: linear-gradient(180deg, #5b8fd6 0%, #2f5f9e 55%, #1b3045 100%);
+    color: #ffffff;
+    padding: 112px 0 0 92px;
+}
+
+.titulo-marca {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 16px;
+}
+
+.subtitulo-marca {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 20px;
+    opacity: 0.9;
+}
+
+.traco-marca {
+    display: block;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: #0A56D0;
+}
+
+@media (max-width: 1023px) {
+    .acesso {
+        grid-template-columns: 1fr;
+        background: #f8fafc;
+    }
+
+    .painel-marca {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .lado-formulario {
+        padding: 72px 24px 32px;
+    }
+
+    .logo {
+        margin-bottom: 72px;
+    }
+}

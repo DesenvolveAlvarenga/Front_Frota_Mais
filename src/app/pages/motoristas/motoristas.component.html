@@ -1,0 +1,118 @@
+<header class="cabecalho-pagina com-acoes">
+  <div>
+    <h1>Motoristas</h1>
+    <p>Convide motoristas e defina os caminhões de cada um</p>
+  </div>
+  <button type="button" class="botao-cabecalho" (click)="novo()">
+    + {{ telaPequena() ? 'Novo' : 'Novo Motorista' }}
+  </button>
+</header>
+
+<section class="cartao-lista" aria-labelledby="titulo-equipe">
+  <div class="cartao-lista-topo">
+    <div>
+      <h2 id="titulo-equipe">Equipe</h2>
+      <p class="contagem">{{ total() }} motorista(s) cadastrado(s)</p>
+    </div>
+    <div class="filtros-lista">
+      <label class="busca">
+        <app-icone nome="busca" [tamanho]="18"></app-icone>
+        <span class="cdk-visually-hidden">Buscar motorista</span>
+        <input type="search" placeholder="Buscar por nome ou e-mail" [value]="busca()"
+          (input)="busca.set($any($event.target).value)">
+      </label>
+      <label class="busca">
+        <span class="cdk-visually-hidden">Filtrar por situação</span>
+        <select class="filtro-situacao" [value]="filtroSituacao()" (change)="filtroSituacao.set($any($event.target).value)">
+          <option value="TODAS">Todas as situações</option>
+          @for (situacao of situacoes; track situacao) {
+            <option [value]="situacao">{{ rotuloSituacao[situacao] }}</option>
+          }
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <app-estado-lista [estado]="estado()" [detalhes]="detalhesFalha()" (tentarDeNovo)="carregar()"
+    mensagemVazio="Nenhum motorista cadastrado. Use “+ Novo Motorista” para enviar o primeiro convite.">
+    @if (!visiveis().length) {
+      <p class="sem-resultado" role="status">Nenhum motorista corresponde ao filtro.</p>
+    } @else if (telaPequena()) {
+      <ul class="lista-cartoes" aria-label="Motoristas">
+        @for (motorista of visiveis(); track motorista.id) {
+          <li class="cartao-item" [attr.data-motorista-id]="motorista.id">
+            <div class="cartao-item-topo">
+              <div>
+                <p class="cartao-item-titulo">{{ motorista.nome }}</p>
+                <p class="cartao-item-linha">{{ motorista.email }}</p>
+              </div>
+              <span [class]="classeSelo[motorista.situacao]">{{ rotuloSituacao[motorista.situacao] }}</span>
+            </div>
+            <p class="cartao-item-linha">Caminhões: {{ placas(motorista) }}</p>
+            @if (motorista.situacao === 'CONVITE_PENDENTE') {
+              <p class="cartao-item-linha">Convite: {{ convite(motorista) }}</p>
+            }
+            <div class="cartao-item-acoes">
+              <ng-container *ngTemplateOutlet="acoes; context: { $implicit: motorista }"></ng-container>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="tabela-rolagem">
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Situação</th>
+              <th scope="col">Caminhões</th>
+              <th scope="col">Convite</th>
+              <th scope="col" class="coluna-acoes acoes-esquerda">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (motorista of visiveis(); track motorista.id) {
+              <tr [attr.data-motorista-id]="motorista.id">
+                <td class="destaque">{{ motorista.nome }}</td>
+                <td>{{ motorista.email }}</td>
+                <td><span [class]="classeSelo[motorista.situacao]">{{ rotuloSituacao[motorista.situacao] }}</span></td>
+                <td>{{ placas(motorista) }}</td>
+                <td>{{ convite(motorista) }}</td>
+                <td class="coluna-acoes acoes-esquerda">
+                  <ng-container *ngTemplateOutlet="acoes; context: { $implicit: motorista }"></ng-container>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </app-estado-lista>
+</section>
+
+<!-- Ações de convite aparecem só para quem ainda não ativou a conta. -->
+<ng-template #acoes let-motorista>
+  <span class="acoes-linha">
+    <button type="button" class="acao-icone acao-editar" (click)="editar(motorista)"
+      [attr.aria-label]="'Editar ' + motorista.nome" title="Editar">
+      <app-icone nome="editar"></app-icone>
+    </button>
+    <button type="button" class="acao-icone acao-vinculos" (click)="vinculos(motorista)"
+      [attr.aria-label]="'Caminhões de ' + motorista.nome" title="Caminhões vinculados">
+      <app-icone nome="caminhao"></app-icone>
+    </button>
+    @if (motorista.situacao === 'CONVITE_PENDENTE') {
+      <button type="button" class="acao-icone acao-reenviar" (click)="reenviarConvite(motorista)"
+        [attr.aria-label]="'Reenviar convite para ' + motorista.nome" title="Reenviar convite">
+        <app-icone nome="enviar"></app-icone>
+      </button>
+      @if (podeCancelarConvite(motorista)) {
+        <button type="button" class="acao-icone perigo acao-cancelar-convite" (click)="cancelarConvite(motorista)"
+          [attr.aria-label]="'Cancelar convite de ' + motorista.nome" title="Cancelar convite">
+          <app-icone nome="fechar"></app-icone>
+        </button>
+      }
+    }
+  </span>
+</ng-template>
